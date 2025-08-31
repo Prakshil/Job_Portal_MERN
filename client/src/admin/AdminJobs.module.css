@@ -1,0 +1,113 @@
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f9fafc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.searchInput {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  width: 250px;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #2563eb; /* blue focus */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.newJobBtn {
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.newJobBtn:hover {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  transform: translateY(-1px);
+}
+
+.tableWrapper {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.jobsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.jobsTable th,
+.jobsTable td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.jobsTable th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.jobsTable tr:hover {
+  background-color: #f9fafb;
+  transition: background-color 0.2s ease;
+}
+.editBtn {
+  background-color: #f0ad4e;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  background-color: #ec971f;
+}
+
+.applicantsBtn {
+  background-color: #5bc0de;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.applicantsBtn:hover {
+  background-color: #31b0d5;
+}

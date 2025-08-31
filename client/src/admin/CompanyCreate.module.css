@@ -1,0 +1,81 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.label {
+  display: block;
+  margin-top: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.95rem;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.button {
+  flex: 1;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelBtn {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+.continueBtn {
+  background: #3b82f6;
+  border: none;
+  color: white;
+}
+
+.continueBtn:hover {
+  background: #2563eb;
+}
