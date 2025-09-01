@@ -7,10 +7,9 @@ const Footer = () => {
       <div className={styles.container}>
         {/* Company Info */}
         <div className={styles.footerSection}>
-          <h2 className={styles.logo}>Felix Job Portal .</h2>
+          <h2 className={styles.logo}>DevConnect Jobs</h2>
           <p className={styles.description}>
-            Building innovative tech solutions to <br /> empower businesses and
-            communities.
+            Connecting talented developers with <br /> innovative tech companies worldwide.
           </p>
         </div>
 
@@ -37,17 +36,16 @@ const Footer = () => {
         <div className={styles.footerSection}>
           <h3>Contact</h3>
           <p>
-            Email: <br /> <br /> contact@felixitsystem.com
+            Email: <br /> contact@devconnect.io
           </p>
           <br />
           <p>
-            Phone: <br /> <br /> +1 (555) 123-4567
+            Phone: <br /> +1 (888) 456-7890
           </p>
           <br />
           <p>
-            Address: <br /> <br /> 304, Shitiratna Complex,Near Panchvati
-            Circle, Chimanlal Girdharlal Rd, next to Radisson blu hotel,
-            Ahmedabad, Gujarat 380006
+            Address: <br /> 1200 Tech Boulevard, Suite 400<br />
+            San Francisco, CA 94107
           </p>
         </div>
       </div>
@@ -55,8 +53,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className={styles.bottomBar}>
         <p>
-          © {new Date().getFullYear()} Felix_Job_Portal Solutions. All rights
-          reserved. 2025
+          © {new Date().getFullYear()} DevConnect Jobs. All rights reserved.
         </p>
       </div>
     </footer>

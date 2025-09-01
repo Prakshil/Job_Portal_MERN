@@ -1,17 +1,19 @@
 .container {
   max-width: 1100px;
   margin: 2rem auto;
-  padding: 1rem;
-  background: #f9fafc;
+  padding: 1.5rem;
+  background: var(--background-dark, #121212);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  color: var(--text-primary, #ffffff);
 }
 
 .title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary, #ffffff);
+  letter-spacing: 0.5px;
 }
 
 .topBar {
@@ -24,90 +26,252 @@
 }
 
 .searchInput {
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1.2rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color, #333);
   border-radius: 8px;
   outline: none;
-  width: 250px;
-  transition: border-color 0.3s ease;
+  width: 300px;
+  transition: all 0.3s ease;
+  background-color: var(--background-light, #1e1e1e);
+  color: var(--text-primary, #ffffff);
 }
 
 .searchInput:focus {
-  border-color: #2563eb; /* blue focus */
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  border-color: var(--primary, #7e57c2);
+  box-shadow: 0 0 0 3px rgba(126, 87, 194, 0.2);
 }
 
 .newJobBtn {
-  padding: 0.6rem 1.2rem;
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  padding: 0.8rem 1.4rem;
+  background: var(--primary, #7e57c2);
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .newJobBtn:hover {
-  background: linear-gradient(135deg, #1e40af, #2563eb);
-  transform: translateY(-1px);
+  background: var(--primary-dark, #5e35b1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .tableWrapper {
-  background: white;
+  background: var(--background-light, #1e1e1e);
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
+  border: 1px solid var(--border-color, #333);
+  will-change: transform; /* Reduces flickering */
 }
 
 .jobsTable {
   width: 100%;
-  border-collapse: collapse;
+  min-width: 1100px;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.95rem;
 }
 
 .jobsTable th,
 .jobsTable td {
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.2rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color, #333);
 }
 
 .jobsTable th {
-  background-color: #f3f4f6;
+  background-color: var(--background-dark, #121212);
   font-weight: 600;
-  color: #374151;
+  color: var(--primary, #7e57c2);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 
 .jobsTable tr:hover {
-  background-color: #f9fafb;
-  transition: background-color 0.2s ease;
+  background-color: rgba(126, 87, 194, 0.1);
+  transition: background-color 0.3s ease;
 }
 .editBtn {
-  background-color: #f0ad4e;
+  background-color: var(--primary-light, #9575cd);
   color: white;
   border: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-right: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-right: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .editBtn:hover {
-  background-color: #ec971f;
+  background-color: var(--primary, #7e57c2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .applicantsBtn {
-  background-color: #5bc0de;
+  background-color: #4285f4;
   color: white;
   border: none;
-  padding: 4px 10px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-right: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .applicantsBtn:hover {
-  background-color: #31b0d5;
+  background-color: #3367d6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.deleteBtn {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.deleteBtn:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.actionCol {
+  min-width: 260px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+/* Empty state styling */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.emptyState p {
+  color: var(--text-secondary, #a0a0a0);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loadingText {
+  color: var(--primary, #7e57c2);
+  font-size: 1.2rem;
+  position: relative;
+  padding-left: 30px;
+}
+
+.loadingText::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(126, 87, 194, 0.3);
+  border-top-color: var(--primary, #7e57c2);
+  animation: spin 1s linear infinite;
+}
+
+.tableRow {
+  transition: all 0.3s ease;
+}
+
+.tableRow:hover {
+  background-color: rgba(126, 87, 194, 0.1);
+}
+
+.jobTitle {
+  font-weight: 500;
+  color: var(--text-primary, #ffffff);
+}
+
+.jobType {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(126, 87, 194, 0.2);
+  color: var(--primary, #7e57c2);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .searchInput {
+    width: 100%;
+  }
+  
+  .jobsTable th,
+  .jobsTable td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .editBtn, .applicantsBtn, .deleteBtn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
 }

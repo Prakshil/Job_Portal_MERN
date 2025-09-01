@@ -97,18 +97,20 @@ const AdminJobs = () => {
         <input
           type="text"
           className={styles.searchInput}
-          placeholder="Filter by name, role"
+          placeholder="🔍 Filter by name, role"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <button className={styles.newJobBtn} onClick={navigateToCreateJob}>
-          + New Job
+          ➕ New Job
         </button>
       </div>
 
       <div className={styles.tableWrapper}>
       {loading ? (
-        <div>Loading jobs...</div>
+        <div className={styles.loadingContainer}>
+          <p className={styles.loadingText}>Loading jobs...</p>
+        </div>
       ) : (
         <table className={styles.jobsTable}>
           <thead>
@@ -126,40 +128,54 @@ const AdminJobs = () => {
           <tbody>
             {filteredJobs.length > 0 ? (
               filteredJobs.map((job, index) => (
-                <tr key={job._id}>
+                <tr key={job._id} className={styles.tableRow}>
                   <td>{index + 1}</td>
-                  <td>{job.title}</td>
+                  <td className={styles.jobTitle}>{job.title}</td>
                   <td>{job.company?.name || 'N/A'}</td>
                   <td>{job.location}</td>
                   <td>${job.salary}</td>
-                  <td>{job.jobType}</td>
+                  <td><span className={styles.jobType}>{job.jobType}</span></td>
                   <td>{new Date(job.createdAt).toLocaleDateString()}</td>
-                  <td>
-                    <button
-                      className={styles.editBtn}
-                      onClick={() => handleEdit(job._id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className={styles.applicantsBtn}
-                      onClick={() => handleApplicants(job._id)}
-                    >
-                      Applicants ({job.applicationCount || 0})
-                    </button>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => handleDelete(job._id)}
-                    >
-                      Delete
-                    </button>
+                  <td className={styles.actionCol}>
+                    <div className={styles.actionButtons}>
+                      <button
+                        className={styles.editBtn}
+                        onClick={() => handleEdit(job._id)}
+                        title="Edit job"
+                      >
+                        ✏️ Edit
+                      </button>
+                      <button
+                        className={styles.applicantsBtn}
+                        onClick={() => handleApplicants(job._id)}
+                        title="View applicants"
+                      >
+                        👥 Applicants ({job.applicationCount || 0})
+                      </button>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => handleDelete(job._id)}
+                        title="Delete job"
+                      >
+                        🗑️ Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8" style={{ textAlign: 'center', padding: '20px' }}>
-                  {jobs.length === 0 ? 'No jobs posted yet. Create your first job!' : 'No jobs match your search.'}
+                <td colSpan="8">
+                  <div className={styles.emptyState}>
+                    <p>
+                      {jobs.length === 0 ? 'No jobs posted yet. Create your first job!' : 'No jobs match your search.'}
+                    </p>
+                    {jobs.length === 0 && (
+                      <button className={styles.newJobBtn} onClick={navigateToCreateJob}>
+                        ➕ Create First Job
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             )}

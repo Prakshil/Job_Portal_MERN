@@ -1,103 +1,111 @@
 .home {
   width: 100%;
-  height: 60vh;
-  /* margin-top: 40px; */
+  height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
-  gap: 20px;
-  /* position: absolute; */
+  gap: 24px;
   top: 0%;
   text-align: center;
+  padding: 0 20px;
 }
+
 .text {
-  
-  box-shadow: 2px 2px 5px wheat;
-  padding: 10px 20px;
-  border-radius: 8px;
-  color: red;
+  background-color: var(--background-light);
+  padding: 12px 24px;
+  border-radius: 30px;
+  color: var(--primary);
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .dream {
-  /* color: ; */
-  background: linear-gradient(to right, red, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary);
+  position: relative;
 }
+
+.dream::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: -6px;
+  left: 0;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
 .input {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 2px solid lightgray;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  padding: 6px 6px 6px 20px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  background: var(--background-light);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
 }
 
-/* .input:hover {
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-  border-color: #ff4d4d;
-} */
-
-/* .input:focus-within {
-  border-color: red;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-} */
+.input:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
 
 .input input {
   border: none;
   outline: none;
-  padding: 12px 20px;
+  padding: 12px 10px;
   font-size: 1rem;
   flex: 1;
-  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
 }
 
 .input input::placeholder {
   font-size: 1rem;
-  font-weight: 500;
-  font-style: italic;
-  color: #888;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .input button {
   border: none;
   outline: none;
-  background: red;
+  background: var(--primary);
   color: white;
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-/* .input button:hover {
-  background: #d90000;
-  transform: scale(1.1);
+.input button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
 }
 
 .input button i {
   font-size: 1.2rem;
-} */
-
-.input input::placeholder {
-  font-size: 1.1rem;
-  font-weight: 500;
-  font-style: italic;
-  /* background-color: green; */
 }
+
 .jobsWrapper {
   position: relative;
-  width: 80%;
+  width: 90%;
   margin: 40px auto;
+  background-color: var(--background-card);
+  border-radius: 12px;
+  padding: 20px 10px;
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -111,47 +119,92 @@
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
 }
+
 .jobs h2 {
-  /* text-align: center; */
-  color: red;
+  color: var(--primary);
+  font-size: 1.1rem;
 }
+
 .jobs::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
 
 .jobs > div {
   min-width: 200px;
-  background: #f5f5f5;
+  background: var(--background-light);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
   flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.jobs > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary);
 }
 
 .scrollBtn {
-  background: white;
+  background: var(--background-light);
   border: none;
   outline: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  color: red;
+  color: var(--primary);
   border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.scrollBtn:hover {
+  background: var(--primary);
+  color: white;
 }
 
 .cardContainer h1 {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 10px;
+  color: var(--text-primary);
 }
+
 .cardContainer .line {
-  border: 1px solid red;
-  /* margin-top: 40px; */
-  width: 10%;
-  margin: 30px auto;
+  border: 1px solid var(--primary);
+  width: 80px;
+  margin: 20px auto 40px;
+}
+
+.signupPrompt {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  padding: 16px 24px;
+  background-color: var(--background-card);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.signupPrompt p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.signupPrompt span {
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.signupPrompt span:hover {
+  opacity: 0.8;
 }

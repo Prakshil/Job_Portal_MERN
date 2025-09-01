@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <header className={style.header}>
       <div className={style.logo}>
-        <NavLink to="/">Felix Job Portal</NavLink>
+        <NavLink to="/">DevConnect Jobs</NavLink>
       </div>
 
       <nav className={style.nav}>

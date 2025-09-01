@@ -4,14 +4,16 @@
  * Supports User and Recruiter roles with JWT authentication
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Login.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {
   // Toggle between login and registration forms
   const [isSignIn, setIsSignIn] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [redirectMessage, setRedirectMessage] = useState("");
 
   // API base URL with fallback
   const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:3000";
@@ -22,6 +24,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("user"); // Default role is user
+
+  useEffect(() => {
+    // Check if there's a message in the location state (from static job cards)
+    if (location.state?.message) {
+      setRedirectMessage(location.state.message);
+    }
+  }, [location]);
 
   /**
    * Toggle between Sign In and Sign Up forms
@@ -35,6 +44,8 @@ const Login = () => {
     setPassword("");
     setPhoneNumber("");
     setRole("user");
+    // Clear redirect message when toggling forms
+    setRedirectMessage("");
   };
 
   /**
@@ -146,6 +157,12 @@ const Login = () => {
     <div className={style.login}>
       <div className={style.loginForm}>
         <h2>{isSignIn ? "Sign In" : "Sign Up"}</h2>
+        
+        {redirectMessage && (
+          <div className={style.redirectMessage}>
+            <p>{redirectMessage}</p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           {/* Registration-only fields */}

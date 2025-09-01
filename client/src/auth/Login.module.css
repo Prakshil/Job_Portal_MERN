@@ -1,107 +1,141 @@
 /* Login.module.css */
 .login {
   height: 100vh;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
-    url(".././public/bg.jpg"); */
-  /* background-size: cover;
-  background-position: center; */
-  /* margin-top: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--background-dark);
 }
 
 .loginLogo {
   width: 100px;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .loginForm {
   width: 100%;
-  max-width: 400px;
-  background: rgba(0, 0, 0, 0.75);
-  border-radius: 4px;
-  padding: 60px;
+  max-width: 420px;
+  background: var(--background-card);
+  border-radius: 12px;
+  padding: 40px;
   margin: auto;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .loginForm h2 {
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 28px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.redirectMessage {
+  background-color: rgba(108, 99, 255, 0.15);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.redirectMessage p {
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .loginForm input {
   width: 100%;
-  height: 40px;
-  background: #333;
-  color: white;
+  height: 48px;
+  background: var(--background-light);
+  color: var(--text-primary);
   margin: 12px 0;
-  border: 0;
+  border: 1px solid var(--border-color);
   outline: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 16px 20px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.loginForm input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
 }
 
 .loginForm input::placeholder {
-  font-size: 16px;
-  font-weight: 500;
-  color: #ccc;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .loginForm button {
   width: 100%;
-  height: 40px;
-  background: #e50914;
+  height: 48px;
+  background: var(--primary);
   color: white;
-  margin: 12px 0;
+  margin: 20px 0 12px;
   border: 0;
   outline: 0;
-  border-radius: 4px;
-  padding: 16px 20px;
+  border-radius: 8px;
+  padding: 0;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginForm button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
 }
 
 .formHelp {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #b3b3b3;
-  font-size: 13px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 12px;
 }
 
 .remember {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .remember input {
   width: 18px;
   height: 18px;
+  accent-color: var(--primary);
+  margin: 0;
 }
 
 .formSwitch {
-  margin-top: 40px;
-  color: #737373;
+  margin-top: 30px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 15px;
 }
 
 .formSwitch span {
   margin-left: 6px;
-  color: #fff;
+  color: var(--primary);
   font-weight: 500;
   cursor: pointer;
 }
+
 .radioGroup {
   display: flex;
   gap: 20px;
-  margin: 12px 0;
-  color: white;
-  font-weight: 500;
-  font-size: 16px;
+  margin: 15px 0;
 }
 
 .radioGroup label {
@@ -109,10 +143,15 @@
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  margin: 12px 0;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .radioGroup input[type="radio"] {
   width: 18px;
   height: 18px;
   cursor: pointer;
+  accent-color: var(--primary);
 }

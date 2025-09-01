@@ -1,51 +1,90 @@
 .container {
   padding: 20px;
+  background-color: var(--background-dark, #121212);
+  color: var(--text-primary, #ffffff);
+  min-height: calc(100vh - 60px);
 }
 
 .headerRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  align-items: center;
 }
 
 .input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color, #333);
   border-radius: 6px;
   flex: 1;
   max-width: 300px;
+  background-color: var(--background-light, #1e1e1e);
+  color: var(--text-primary, #ffffff);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: var(--primary, #7e57c2);
+  box-shadow: 0 0 0 2px rgba(126, 87, 194, 0.2);
 }
 
 .newCompanyBtn {
-  background-color: #4cafef;
+  background-color: var(--primary, #7e57c2);
   color: white;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.newCompanyBtn:hover {
+  background-color: var(--primary-dark, #5e35b1);
 }
 
 .tableWrapper {
   overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  will-change: transform; /* Reduces flickering */
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
-  background: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--background-light, #1e1e1e);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .table th,
 .table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  border-bottom: 1px solid var(--border-color, #333);
+  padding: 16px;
   text-align: left;
 }
 
 .table th {
-  background-color: #f4f4f4;
+  background-color: var(--background-dark, #121212);
   font-weight: 600;
+  color: var(--primary, #7e57c2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .companyLogo {
@@ -53,37 +92,119 @@
   height: 50px;
   object-fit: contain;
   border-radius: 6px;
-  border: 1px solid #e0e0e0;
-  background: #f9f9f9;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  transition: transform 0.2s ease;
 }
 
 .editBtn {
-  background-color: #ffc107;
+  background-color: var(--primary-light, #9575cd);
   color: white;
   border: none;
-  padding: 5px 10px;
-  margin-right: 5px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  margin-right: 8px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
 }
 
 .deleteBtn {
   background-color: #e53935;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
 }
 
 .editBtn:hover {
-  background-color: #e0a800;
+  background-color: var(--primary, #7e57c2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .deleteBtn:hover {
-  background-color: #c62828;
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.websiteLink {
+  color: var(--primary, #7e57c2);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px dashed var(--primary, #7e57c2);
+  padding-bottom: 2px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.websiteLink:hover {
+  color: var(--primary-light, #9575cd);
+  border-bottom: 1px solid var(--primary-light, #9575cd);
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: var(--background-light, #1e1e1e);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.loadingText {
+  color: var(--primary, #7e57c2);
+  font-size: 1.2rem;
+  position: relative;
+  padding-left: 30px;
+}
+
+.loadingText::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(126, 87, 194, 0.3);
+  border-top-color: var(--primary, #7e57c2);
+  animation: spin 1s linear infinite;
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: var(--background-light, #1e1e1e);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.emptyState p {
+  color: var(--text-secondary, #a0a0a0);
+  font-size: 1.1rem;
+}
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
 }
 
 /* Responsive design */
@@ -102,14 +223,24 @@
     width: 100%;
   }
 
-  .companyLogo {
+  .logoContainer {
     width: 40px;
     height: 40px;
   }
 
+  .companyLogo {
+    width: 36px;
+    height: 36px;
+  }
+
   .table th,
   .table td {
-    padding: 8px;
+    padding: 12px 8px;
     font-size: 0.9rem;
+  }
+  
+  .editBtn, .deleteBtn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
   }
 }

@@ -7,11 +7,15 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./Home.module.css";
 import Card from "../card/Card";
+import StaticJobCards from "../card/StaticJobCards";
 
 const Home = () => {
   // Refs for horizontal scrolling functionality
   const jobsRef = useRef(null);
   const navigate = useNavigate();
+  
+  // Check if user is logged in
+  const isLoggedIn = localStorage.getItem("role");
 
   // State for search functionality
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,15 +60,14 @@ const Home = () => {
     <>
       {/* Hero Section with main heading and search */}
       <div className={style.home}>
-        <p className={style.text}>No. 1 Felix Job Portal Website </p>
+        <p className={style.text}>The Premier Tech Job Platform</p>
         <h1>
-          Search, Apply & <br />
-          Get Your <span className={style.dream}>Dream Jobs</span>
+          Discover & Apply to <br />
+          Your <span className={style.dream}>Ideal Tech Careers</span>
         </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-          perferendis, ratione consequatur <br /> animi cupiditate saepe
-          eligendi expedita ipsum eaque voluptas?
+          Connect with the best tech companies and find opportunities that match your skills and aspirations. <br />
+          Streamlined application process to help you land your next role faster.
         </p>
 
         {/* Search Form */}
@@ -122,8 +125,15 @@ const Home = () => {
       <div className={style.cardContainer}>
         <h1>Latest and Top Popular Jobs For You</h1>
         <div className={style.line}></div>
+        
+        {!isLoggedIn && (
+          <div className={style.signupPrompt}>
+            <p>Ready to apply for these exciting positions? <span onClick={() => navigate('/login')}>Sign in</span> or create an account to access full job details and submit your application.</p>
+          </div>
+        )}
+        
         <div>
-          <Card />
+          {isLoggedIn ? <Card /> : <StaticJobCards />}
         </div>
       </div>
     </>

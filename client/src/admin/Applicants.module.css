@@ -93,16 +93,20 @@
 
 .table th {
   text-align: left;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-bottom: 2px solid #e5e7eb;
+  padding: 14px 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-bottom: 2px solid #28284a;
+  color: var(--primary, #7e57c2);
+  background: #232336;
+  letter-spacing: 0.5px;
 }
 
 .table td {
-  padding: 12px;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 12px;
+  font-size: 0.98rem;
+  border-bottom: 1px solid #28284a;
+  color: #fff;
 }
 
 .actionCol {
@@ -157,12 +161,16 @@
 }
 
 .statusBadge {
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  color: #fff;
+  padding: 5px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
+  background: linear-gradient(90deg, #ffb300 60%, #ff9800 100%);
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border: none;
 }
 
 .actionButtons {
@@ -176,44 +184,50 @@
 }
 
 .acceptBtn {
-  background: #28a745;
-  color: white;
+  background: linear-gradient(90deg, #43e97b 60%, #38f9d7 100%);
+  color: #181828;
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 7px 18px;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  transition: background 0.3s;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(67,233,123,0.10);
 }
 
 .acceptBtn:hover:not(:disabled) {
-  background: #218838;
+  background: linear-gradient(90deg, #38f9d7 60%, #43e97b 100%);
+  color: #181828;
 }
 
 .acceptBtn:disabled {
-  background: #6c757d;
+  background: #44445a;
+  color: #aaa;
   cursor: not-allowed;
 }
 
 .rejectBtn {
-  background: #dc3545;
-  color: white;
+  background: linear-gradient(90deg, #ff5858 60%, #f857a6 100%);
+  color: #fff;
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 7px 18px;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  transition: background 0.3s;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255,88,88,0.10);
 }
 
 .rejectBtn:hover:not(:disabled) {
-  background: #c82333;
+  background: linear-gradient(90deg, #f857a6 60%, #ff5858 100%);
+  color: #fff;
 }
 
 .rejectBtn:disabled {
-  background: #6c757d;
+  background: #44445a;
+  color: #aaa;
   cursor: not-allowed;
 }
 
@@ -225,24 +239,28 @@
 }
 
 .statCard {
-  background: white;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  padding: 25px;
+  background: #232336;
+  border: 2px solid var(--primary, #7e57c2);
+  border-radius: 14px;
+  padding: 32px 0 24px 0;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  color: #fff;
 }
 
 .statCard h3 {
-  font-size: 2rem;
-  color: #007bff;
+  font-size: 2.3rem;
+  color: var(--primary, #7e57c2);
   margin: 0 0 10px 0;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .statCard p {
-  color: #666;
+  color: #b0b0b0;
   margin: 0;
   font-weight: 500;
+  font-size: 1.1rem;
 }
 
 @media (max-width: 768px) {

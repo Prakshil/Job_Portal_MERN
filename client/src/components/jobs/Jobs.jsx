@@ -120,7 +120,7 @@ const Jobs = () => {
     <>
       <div className={style.dashboard}>
         <div className={style.sidebar}>
-          <p className={style.title}>Filter Felix Opening Jobs</p>
+          <p className={style.title}>Filter DevConnect Jobs</p>
 
           {/* Search Bar */}
           <div className={style.filterSection}>
@@ -151,7 +151,7 @@ const Jobs = () => {
                 <li 
                   key={i} 
                   onClick={() => handleFilterChange("location", city)}
-                  className={filters.location === city ? style.active : ""}
+                  className={`${filters.location === city ? style.active : ""} ${!city ? style.allOption : ""}`}
                 >
                   {city || "All Locations"}
                 </li>
@@ -167,7 +167,7 @@ const Jobs = () => {
                   <li 
                     key={i}
                     onClick={() => handleFilterChange("industry", ind)}
-                    className={filters.industry === ind ? style.active : ""}
+                    className={`${filters.industry === ind ? style.active : ""} ${!ind ? style.allOption : ""}`}
                   >
                     {ind || "All Industries"}
                   </li>

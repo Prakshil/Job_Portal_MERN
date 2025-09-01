@@ -22,10 +22,19 @@ const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
+// Create uploads directory if it doesn't exist
+const fs = require('fs');
+const uploadsDir = path.join(__dirname, "../uploads");
+
+if (!fs.existsSync(uploadsDir)){
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log('Uploads directory created:', uploadsDir);
+}
+
 // Configure multer for logo uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../uploads"));
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     // Generate unique filename with timestamp
