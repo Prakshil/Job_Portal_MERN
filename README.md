@@ -33,11 +33,6 @@
 
 ---
 
-## 📸 Screenshots
-
-| Home Page | Job Listing | Admin Dashboard |
-|-----------|-------------|-----------------|
-| ![Home](assets/screenshots/home.png) | ![Jobs](assets/screenshots/jobs.png) | ![Admin](assets/screenshots/admin.png) |
 
 ---
 
@@ -159,3 +154,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 > _Empowering developers. Connecting talent. Building the future._ 🚀
 
 ---
+
