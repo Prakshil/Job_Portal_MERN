@@ -16,11 +16,8 @@ const mongoose = require("mongoose");
  */
 const connectDb = async () => {
   try {
-    // Connect to MongoDB with optimized settings
-    await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,        // Use new URL parser
-      useUnifiedTopology: true,     // Use new server discovery and monitoring engine
-    });
+    // Connect to MongoDB (deprecated options removed for Node.js Driver 4.0+)
+    await mongoose.connect(process.env.MONGO_URL || process.env.MONGO_URI);
 
     // Log successful connection details
     console.log("✅ MongoDB connected successfully");
