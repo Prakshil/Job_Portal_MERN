@@ -55,13 +55,13 @@ const upload = multer({
 // Configure CORS for cross-origin requests
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://devconnects-p0bl.onrender.com"
-    ], // Frontend URLs
-    credentials: true, // Allow cookies and authentication headers
-  })
+          origin: [
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "https://devconnects-psi.vercel.app"
+          ], // Frontend URLs
+          credentials: true, // Allow cookies and authentication headers
+        })
 );
 
 // Middleware to parse JSON and URL-encoded data

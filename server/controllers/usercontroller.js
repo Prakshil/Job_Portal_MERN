@@ -76,7 +76,7 @@ const register = async (req, res) => {
     res.cookie("token", token, {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
       httpOnly: true, // Prevent XSS attacks
-      secure: false, // Set to true in production with HTTPS
+      secure: process.env.NODE_ENV === "production", // true in production (HTTPS)
       sameSite: 'lax', // CSRF protection
       path: '/'
     });
