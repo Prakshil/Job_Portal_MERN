@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
 
 // Server configuration
 const PORT = process.env.PORT || 3000;
-const HOSTNAME = process.env.HOSTNAME || "127.0.0.1";
+const HOSTNAME = "0.0.0.0";
 
 // Connect to database and start server
 db()
