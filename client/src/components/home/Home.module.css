@@ -44,7 +44,7 @@
   gap: 10px;
   padding: 6px 6px 6px 20px;
   border-radius: 50px;
-  border: 1px solid var(--border-color);
+  
   background: var(--background-light);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -54,7 +54,7 @@
 }
 
 .input:focus-within {
-  border-color: var(--primary);
+ 
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
 }
 
@@ -97,6 +97,8 @@
 .input button i {
   font-size: 1.2rem;
 }
+
+/* search removed from home; styles intentionally omitted */
 
 .jobsWrapper {
   position: relative;

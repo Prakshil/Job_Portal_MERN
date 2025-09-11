@@ -3,7 +3,7 @@
  * Main entry point of the job portal with hero section, search functionality, and job categories
  */
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./Home.module.css";
 import Card from "../card/Card";
@@ -13,7 +13,6 @@ const Home = () => {
   const jobsRef = useRef(null);
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("role");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const scrollLeft = () => {
     if (jobsRef.current) jobsRef.current.scrollBy({ left: -200, behavior: "smooth" });
@@ -23,16 +22,7 @@ const Home = () => {
     if (jobsRef.current) jobsRef.current.scrollBy({ left: 200, behavior: "smooth" });
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/jobs?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      navigate("/jobs");
-    }
-  };
-
-  const handleInputChange = (e) => setSearchQuery(e.target.value);
+  // Search removed from home page
 
   return (
     <>
@@ -47,16 +37,7 @@ const Home = () => {
           Connect with the best tech companies and find opportunities that match your skills and aspirations.
           <br /> Streamlined application process to help you land your next role faster.
         </p>
-        <form onSubmit={handleSearch} className={style.searchForm}>
-          <input
-            type="text"
-            placeholder="Search jobs, keywords, or companies"
-            value={searchQuery}
-            onChange={handleInputChange}
-            className={style.searchInput}
-          />
-          <button type="submit" className={style.searchBtn}>Search</button>
-        </form>
+        {/* search removed */}
       </div>
 
       {/* Job categories */}
