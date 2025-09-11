@@ -1,8 +1,15 @@
+/* Fix browser autofill and validation border issues */
+input, input:focus, input:active, input:autofill, input:-webkit-autofill, input:invalid {
+  border: 1px solid #2563eb !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
 .container {
   max-width: 700px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #ffffff;
+  background: var(--background-card);
+  color: var(--text-primary);
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
@@ -82,10 +89,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--border-color);
   border-radius: 8px;
   padding: 1rem;
-  background: #f8f9fa;
+  background: var(--background-light);
 }
 
 .previewImage {
@@ -102,8 +109,8 @@
   padding: 0.9rem;
   font-size: 1rem;
   font-weight: 600;
-  background: #2563eb;
-  color: white;
+  background: var(--primary-dark);
+  color: var(--text-primary);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -111,11 +118,11 @@
 }
 
 .submitBtn:hover {
-  background: #1d4ed8;
+  background: var(--primary);
 }
 
 .disabled {
-  background: #94a3b8;
+  background: var(--border-color);
   cursor: not-allowed;
 }
 
