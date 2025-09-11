@@ -56,6 +56,7 @@ const Home = () => {
     setSearchQuery(e.target.value);
   };
 
+
   return (
     <>
       {/* Hero Section with main heading and search */}
@@ -69,8 +70,8 @@ const Home = () => {
           Connect with the best tech companies and find opportunities that match your skills and aspirations. <br />
           Streamlined application process to help you land your next role faster.
         </p>
+      </div>
 
-   
       {/* Job Categories Section with horizontal scrolling */}
       <div className={style.jobsWrapper}>
         <button className={style.scrollBtn} onClick={scrollLeft}>
@@ -110,13 +111,11 @@ const Home = () => {
       <div className={style.cardContainer}>
         <h1>Latest and Top Popular Jobs For You</h1>
         <div className={style.line}></div>
-        
         {!isLoggedIn && (
           <div className={style.signupPrompt}>
             <p>Ready to apply for these exciting positions? <span onClick={() => navigate('/login')}>Sign in</span> or create an account to access full job details and submit your application.</p>
           </div>
         )}
-        
         <div>
           {isLoggedIn ? <Card /> : <StaticJobCards />}
         </div>
