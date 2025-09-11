@@ -70,22 +70,7 @@ const Home = () => {
           Streamlined application process to help you land your next role faster.
         </p>
 
-        {/* Search Form */}
-        <form onSubmit={handleSearch}>
-          <div className={style.input}>
-            <input
-              type="search"
-              placeholder="find your dream jobs...."
-              value={searchQuery}
-              onChange={handleInputChange}
-            />
-            <button type="submit">
-              <i className="ri-search-line"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-
+   
       {/* Job Categories Section with horizontal scrolling */}
       <div className={style.jobsWrapper}>
         <button className={style.scrollBtn} onClick={scrollLeft}>
