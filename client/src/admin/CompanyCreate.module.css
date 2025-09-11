@@ -4,13 +4,15 @@
   padding: 2rem;
 }
 
+/* removed broken block */
+
 .card {
-  background: #ffffff;
+  background: var(--background-card);
+  color: var(--text-primary);
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
 .header h1 {
   font-size: 1.75rem;
   font-weight: bold;
@@ -29,16 +31,19 @@
   margin-bottom: 0.5rem;
 }
 
+/* removed broken block */
+
 .input {
   width: 100%;
   padding: 0.7rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   outline: none;
   transition: all 0.2s ease-in-out;
   font-size: 0.95rem;
+  background: var(--background-light);
+  color: var(--text-primary);
 }
-
 .input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
@@ -60,12 +65,13 @@
   transition: all 0.2s ease-in-out;
 }
 
-.cancelBtn {
-  background: #f3f4f6;
-  border: 1px solid #d1d5db;
-  color: #374151;
-}
+/* removed broken block */
 
+.cancelBtn {
+  background: var(--background-light);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
 .cancelBtn:hover {
   background: #e5e7eb;
 }
