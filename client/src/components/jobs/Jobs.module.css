@@ -1,28 +1,32 @@
 .dashboard {
   width: 100%;
-  min-height: calc(100vh - 100px); /* Adjusted to prevent footer overlap */
+  min-height: 100vh;
   display: flex;
-  padding-bottom: 60px; /* Added padding to prevent footer overlap */
+  padding-top: 120px; /* Added padding for fixed header */
+  padding-bottom: 60px;
+  background-color: var(--background-dark); /* Ensure background is dark */
 }
+
 .sidebar {
   background: var(--background-card);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   width: 280px;
-  height: calc(100vh - 160px); /* Adjusted height */
+  height: calc(100vh - 140px); /* Adjusted height */
   position: sticky;
-  top: 80px; /* Position below header */
-  margin: 20px 0 20px 20px;
+  top: 120px; /* Align with content padding */
+  margin: 0 0 20px 20px; /* Adjusted margins */
   border: 1px solid var(--border-color);
-  overflow-y: auto; /* Make sidebar scrollable */
+  overflow-y: auto;
 }
+
 .content {
   flex: 1;
-  min-height: calc(100vh - 160px);
-  padding: 20px;
+  min-height: calc(100vh - 140px);
+  padding: 0 20px; /* Adjusted padding */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Slightly smaller min-width */
   gap: 20px;
   align-content: flex-start;
 }
@@ -90,7 +94,7 @@
   flex-direction: column;
   gap: 14px;
   position: relative;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   margin-bottom: 20px;
 }
@@ -98,6 +102,7 @@
 .card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
+  box-shadow: 0 12px 28px rgba(108, 99, 255, 0.2);
 }
 
 .cardHeader {
@@ -178,9 +183,9 @@
 }
 
 .detailsBtn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
   padding: 10px 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -202,8 +207,10 @@
 }
 
 .detailsBtn:hover {
-  background: var(--primary-dark);
+  background: var(--primary);
+  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
 }
 
 .saveBtn:hover {
@@ -305,6 +312,7 @@
 .applyBtn:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
 }
 
 /* Media queries for responsive design */

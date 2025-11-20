@@ -29,18 +29,114 @@ const Jobs = () => {
   // Fetch all jobs
   useEffect(() => {
     const fetchJobs = async () => {
+      const manualJobs = [
+        {
+          _id: 'manual-1',
+          title: 'Senior Frontend Developer',
+          company: { name: 'TechVision Inc.', logoUrl: 'https://cdn-icons-png.flaticon.com/512/732/732221.png' },
+          jobType: 'Full-time',
+          salary: '120,000 - 150,000',
+          location: 'San Francisco, CA (Remote)',
+          experienceLevel: '3-5 years',
+          description: 'Join our team to build modern web applications using React, TypeScript, and GraphQL. We are looking for experienced developers who can lead frontend initiatives.',
+          createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+          position: 5
+        },
+        {
+          _id: 'manual-2',
+          title: 'Backend Engineer (Node.js)',
+          company: { name: 'DataFlow Systems', logoUrl: 'https://cdn-icons-png.flaticon.com/512/2906/2906274.png' },
+          jobType: 'Full-time',
+          salary: '110,000 - 140,000',
+          location: 'New York, NY (Hybrid)',
+          experienceLevel: '2-4 years',
+          description: 'Develop scalable backend services using Node.js, Express, and MongoDB. Implement RESTful APIs and microservices architecture.',
+          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+          position: 3
+        },
+        {
+          _id: 'manual-3',
+          title: 'UX/UI Designer',
+          company: { name: 'CreativeMinds', logoUrl: 'https://cdn-icons-png.flaticon.com/512/5968/5968705.png' },
+          jobType: 'Contract',
+          salary: '90,000 - 110,000',
+          location: 'Austin, TX (On-site)',
+          experienceLevel: '2+ years',
+          description: 'Design intuitive user interfaces for web and mobile applications. Create wireframes, prototypes, and collaborate with development teams.',
+          createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+          position: 2
+        },
+        {
+            _id: 'manual-4',
+            title: 'DevOps Engineer',
+            company: { name: 'CloudTech Solutions', logoUrl: 'https://cdn-icons-png.flaticon.com/512/873/873107.png' },
+            jobType: 'Full-time',
+            salary: '125,000 - 155,000',
+            location: 'Seattle, WA (Hybrid)',
+            experienceLevel: '3+ years',
+            description: 'Implement CI/CD pipelines, manage cloud infrastructure on AWS, and optimize application deployment processes.',
+            createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+            position: 4
+        },
+        {
+            _id: 'manual-5',
+            title: 'Full Stack Developer',
+            company: { name: 'Innovate Solutions', logoUrl: 'https://cdn-icons-png.flaticon.com/512/2702/2702602.png' },
+            jobType: 'Full-time',
+            salary: '130,000 - 160,000',
+            location: 'Remote',
+            experienceLevel: '4+ years',
+            description: 'Work on all aspects of our SaaS platform using React, Node.js, and AWS. Strong problem-solving skills and full product lifecycle experience required.',
+            createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+            position: 2
+        },
+        {
+            _id: 'manual-6',
+            title: 'Machine Learning Engineer',
+            company: { name: 'AI Innovations', logoUrl: 'https://cdn-icons-png.flaticon.com/512/2103/2103633.png' },
+            jobType: 'Full-time',
+            salary: '140,000 - 180,000',
+            location: 'Boston, MA (Remote)',
+            experienceLevel: '3-5 years',
+            description: 'Develop machine learning models and algorithms to solve complex business problems. Experience with Python, TensorFlow, and cloud ML platforms required.',
+            createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+            position: 3
+        }
+      ];
+
       try {
         const response = await fetch(`${API_URL}/api/job/get`);
         const data = await response.json();
         
+        let fetchedJobs = [];
         if (response.ok && data.jobs) {
-          setJobs(data.jobs);
-          setFilteredJobs(data.jobs);
+          fetchedJobs = data.jobs;
         } else {
           console.error("Failed to fetch jobs:", data.error);
         }
+
+        // Add manual jobs if not logged in OR if no jobs found
+        const token = localStorage.getItem("token");
+        if (!token || fetchedJobs.length === 0) {
+            // If we have fetched jobs but user is not logged in, we might want to show both? 
+            // But usually fetched jobs are better. 
+            // If fetchedJobs is empty, show manual jobs.
+            if (fetchedJobs.length === 0) {
+                fetchedJobs = manualJobs;
+            } else if (!token) {
+                // If we have jobs but user is guest, maybe append manual jobs?
+                // Or just show fetched jobs. Let's append for more content.
+                fetchedJobs = [...fetchedJobs, ...manualJobs];
+            }
+        }
+
+        setJobs(fetchedJobs);
+        setFilteredJobs(fetchedJobs);
       } catch (error) {
         console.error("Error fetching jobs:", error);
+        // If fetch fails, show manual jobs
+        setJobs(manualJobs);
+        setFilteredJobs(manualJobs);
       } finally {
         setLoading(false);
       }
@@ -77,6 +173,10 @@ const Jobs = () => {
   };
 
   const handleJobClick = (jobId) => {
+    if (jobId.toString().startsWith('manual-')) {
+        navigate('/login', { state: { message: 'Sign in to view job details and apply' } });
+        return;
+    }
     navigate(`/job/${jobId}`);
   };
 
@@ -205,18 +305,15 @@ const Jobs = () => {
                   <span className={style.date}>
                     Created: {new Date(job.createdAt).toLocaleDateString()}
                   </span>
-                  <span className={style.favorite} title="Add to favourites">
-                    ❤️
-                  </span>
                 </div>
 
                 <div className={style.companyInfo}>
                   <img
-                    src={job.company?.logo ? `${API_URL}${job.company.logo}` : "/vite.svg"}
+                    src={job.company?.logoUrl || (job.company?.logo ? `${API_URL}${job.company.logo}` : "https://cdn-icons-png.flaticon.com/512/3688/3688609.png")}
                     alt={`${job.company?.name} Logo`}
                     className={style.logo}
                     onError={(e) => {
-                      e.target.src = "/vite.svg"; // Fallback if logo fails to load
+                      e.target.src = "https://cdn-icons-png.flaticon.com/512/3688/3688609.png"; // Fallback if logo fails to load
                     }}
                   />
                   <div>

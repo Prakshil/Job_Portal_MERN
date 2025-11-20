@@ -26,17 +26,11 @@ import AdminJobs from "./admin/AdminJobs";
 import PostJob from "./admin/PostJob";
 import Applicants from "./admin/Applicants";
 
-// User Components
-import UserDashboard from "./components/user/UserDashboard";
 
-// Utility Components
+import UserDashboard from "./components/user/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/dashborad/Dashboard";
 
-/**
- * Layout Component
- * Provides consistent header and footer across all pages
- */
 const Layout = () => {
   return (
     <>

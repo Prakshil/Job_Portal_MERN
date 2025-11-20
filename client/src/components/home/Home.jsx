@@ -1,81 +1,85 @@
-/**
- * Home Component - Landing Page
- * Main entry point of the job portal with hero section, search functionality, and job categories
- */
-
-import React, { useRef } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import style from "./Home.module.css";
-import Card from "../card/Card";
-import StaticJobCards from "../card/StaticJobCards";
+import { GridBackgroundDemo } from "../ui/background";
+import FeaturesSectionDemo from "../ui/features-section-demo-1";
+import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
+import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn, IconCode, IconDeviceDesktopAnalytics, IconServer } from "@tabler/icons-react";
 
 const Home = () => {
-  const jobsRef = useRef(null);
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("role");
 
-  const scrollLeft = () => {
-    if (jobsRef.current) jobsRef.current.scrollBy({ left: -200, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    if (jobsRef.current) jobsRef.current.scrollBy({ left: 200, behavior: "smooth" });
-  };
-
-  // Search removed from home page
-
   return (
-    <>
-      {/* Hero Section */}
-      <div className={style.home}>
-        <p className={style.text}>The Premier Tech Job Platform</p>
-        <h1>
-          Discover & Apply to <br />
-          Your <span className={style.dream}>Ideal Tech Careers</span>
-        </h1>
-        <p>
-          Connect with the best tech companies and find opportunities that match your skills and aspirations.
-          <br /> Streamlined application process to help you land your next role faster.
-        </p>
-        {/* search removed */}
-      </div>
-
-      {/* Job categories */}
-      <div className={style.jobsWrapper}>
-        <button className={style.scrollBtn} onClick={scrollLeft}>
-          <i className="ri-arrow-left-s-line"></i>
-        </button>
-
-        <div className={style.jobs} ref={jobsRef}>
-          <div><h2>Frontend Developer</h2></div>
-          <div><h2>Backend Developer</h2></div>
-          <div><h2>UI/UX Designer</h2></div>
-          <div><h2>Full Stack Developer</h2></div>
-          <div><h2>Project Manager</h2></div>
-          <div><h2>Data Scientist</h2></div>
-          <div><h2>DevOps Engineer</h2></div>
-        </div>
-
-        <button className={style.scrollBtn} onClick={scrollRight}>
-          <i className="ri-arrow-right-s-line"></i>
-        </button>
-      </div>
-
-      {/* Featured Jobs */}
-      <div className={style.cardContainer}>
-        <h1>Latest and Top Popular Jobs For You</h1>
-        <div className={style.line} />
-        {!isLoggedIn && (
-          <div className={style.signupPrompt}>
-            <p>
-              Ready to apply for these exciting positions? <span onClick={() => navigate("/login")}>Sign in</span> or create an account to access full job details and submit your application.
+    <div className="bg-black min-h-screen w-full text-white">
+      {/* Hero Section with Background */}
+      <GridBackgroundDemo>
+         <div className="flex flex-col items-center justify-center px-4">
+            <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+              DevConnect Jobs
+            </h1>
+            <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
+              The Premier Tech Job Platform. Discover & Apply to Your Ideal Tech Careers.
+              Connect with the best tech companies and find opportunities that match your skills.
             </p>
-          </div>
-        )}
-        <div>{isLoggedIn ? <Card /> : <StaticJobCards />}</div>
+            {!isLoggedIn && (
+                <button onClick={() => navigate("/login")} className="mt-8 px-8 py-3 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition duration-200">
+                    Get Started
+                </button>
+            )}
+         </div>
+      </GridBackgroundDemo>
+
+      {/* Features Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">Why Choose Us?</h2>
+        <FeaturesSectionDemo />
       </div>
-    </>
+
+      {/* Bento Grid for Categories */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24">
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">Explore Categories</h2>
+        <BentoGrid className="max-w-4xl mx-auto">
+          {items.map((item, i) => (
+            <BentoGridItem
+              key={i}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+              className={i === 3 || i === 6 ? "md:col-span-2" : ""}
+            />
+          ))}
+        </BentoGrid>
+      </div>
+    </div>
   );
 };
+
+const items = [
+  {
+    title: "Frontend Developer",
+    description: "Build beautiful user interfaces with React, Vue, or Angular. \n\n• 150+ Open Positions\n• Avg Salary: $95k\n• Remote Options Available",
+    icon: <IconCode className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Backend Developer",
+    description: "Power the web with robust APIs using Node.js, Python, or Go. \n\n• 120+ Open Positions\n• Avg Salary: $105k\n• High Demand",
+    icon: <IconServer className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Full Stack",
+    description: "Master both ends of the spectrum. \n\n• 200+ Open Positions\n• Avg Salary: $110k\n• Versatile Roles",
+    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Data Science",
+    description: "Unlock insights from data with ML and AI. \n\n• 80+ Open Positions\n• Avg Salary: $120k\n• Rapidly Growing Field",
+    icon: <IconDeviceDesktopAnalytics className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "DevOps Engineer",
+    description: "Streamline deployment and operations. \n\n• 90+ Open Positions\n• Avg Salary: $115k\n• Critical Infrastructure Role",
+    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+  },
+];
 
 export default Home;
