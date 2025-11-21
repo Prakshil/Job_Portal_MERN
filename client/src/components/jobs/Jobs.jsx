@@ -315,12 +315,15 @@ const Jobs = () => {
                   {logoUrl && (
                     <img
                       src={logoUrl}
-                      alt="Company Logo"
+                      alt={`${name || 'Company'} Logo`}
                       className={style.logo}
                       onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
                     />
                   )}
                   <div>
+                    {name && (
+                      <h2 className={style.companyName}>{name}</h2>
+                    )}
                     <p className={style.location}>📍 {job.location}</p>
                     <p className={style.roleType}>💼 {job.title} ({job.jobType})</p>
                   </div>

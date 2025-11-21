@@ -98,11 +98,14 @@ const UserDashboard = () => {
               <div className={styles.companyInfo}>
                 <img
                   src={logoUrl}
-                  alt="Company Logo"
+                  alt={`${name || 'Company'} Logo`}
                   className={styles.companyLogo}
                   onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
                 />
                 <div>
+                  <h4 className={styles.companyName}>
+                    {name || "Company Name"}
+                  </h4>
                   <p className={styles.location}>📍 {application.job?.location}</p>
                 </div>
               </div>

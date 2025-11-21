@@ -111,7 +111,7 @@ const Card = () => {
           <div className={style.cardHeader}>
             <img
               src={logoUrl}
-              alt="Company Logo"
+              alt={`${name || 'Company'} Logo`}
               className={style.companyLogo}
               onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
             />
@@ -119,6 +119,7 @@ const Card = () => {
           </div>
 
           <h2 className={style.jobTitle}>{job.title}</h2>
+          {name && <h3 className={style.companyName}>{name}</h3>}
 
           <div className={style.jobDetails}>
             <p>
