@@ -240,6 +240,7 @@
 .jobActions {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .actionBtn {
@@ -257,6 +258,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .actionBtn:hover {
@@ -275,10 +277,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .editBtn:hover {
   background: hsl(var(--muted));
+  border-color: #6366f1;
+  color: #6366f1;
 }
 
 .deleteBtn:hover {

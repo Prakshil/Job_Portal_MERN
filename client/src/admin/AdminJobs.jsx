@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Briefcase, Users, Eye, Plus, Calendar, MapPin, DollarSign, Trash2, Edit, Building2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import gsap from 'gsap';
 import styles from "./AdminJobs.module.css";
 
 const AdminJobs = () => {
@@ -10,6 +11,9 @@ const AdminJobs = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const headerRef = useRef(null);
+  const statsRef = useRef(null);
+  const jobCardsRef = useRef([]);
 
   // Fetch jobs created by the current recruiter
   useEffect(() => {
@@ -43,6 +47,62 @@ const AdminJobs = () => {
 
     fetchJobs();
   }, []);
+
+  useEffect(() => {
+    // Animate header
+    if (headerRef.current) {
+      gsap.fromTo(headerRef.current,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
+      );
+    }
+
+    // Animate stats cards
+    if (statsRef.current) {
+      const cards = statsRef.current.querySelectorAll('[class*="bentoCard"]');
+      gsap.fromTo(cards,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: 0.3
+        }
+      );
+    }
+
+    // Animate job cards when they load
+    if (jobs.length > 0 && jobCardsRef.current.length > 0) {
+      gsap.fromTo(jobCardsRef.current,
+        { opacity: 0, scale: 0.95 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.08,
+          ease: "power2.out"
+        }
+      );
+    }
+  }, [jobs]);
+
+  const handleCardHover = (e, isEntering) => {
+    gsap.to(e.currentTarget, {
+      y: isEntering ? -4 : 0,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  };
+
+  const handleButtonHover = (e, isEntering) => {
+    gsap.to(e.currentTarget, {
+      scale: isEntering ? 1.05 : 1,
+      duration: 0.2,
+      ease: "power2.out"
+    });
+  };
 
   // Navigation handlers
   const navigateToCreateJob = () => {
@@ -119,7 +179,7 @@ const AdminJobs = () => {
   return (
     <div className={styles.container}>
       {/* Header Section */}
-      <div className={styles.header}>
+      <div ref={headerRef} className={styles.header}>
         <div>
           <h1 className={styles.title}>Recruiter Dashboard</h1>
           <p className={styles.subtitle}>Manage your job postings and track applications</p>
@@ -127,6 +187,8 @@ const AdminJobs = () => {
         <button 
           onClick={navigateToCreateJob}
           className={styles.createBtn}
+          onMouseEnter={handleButtonHover}
+          onMouseLeave={(e) => handleButtonHover(e, false)}
         >
           <Plus size={20} />
           New Job
@@ -134,7 +196,7 @@ const AdminJobs = () => {
       </div>
 
       {/* Bento Grid Stats */}
-      <div className={styles.bentoGrid}>
+      <div ref={statsRef} className={styles.bentoGrid}>
         <div className={`${styles.bentoCard} ${styles.bentoLarge}`}>
           <div className={styles.cardIcon} style={{ backgroundColor: '#6366f1' }}>
             <Briefcase size={24} />
@@ -197,8 +259,14 @@ const AdminJobs = () => {
           </div>
         ) : (
           <div className={styles.jobsGrid}>
-            {filteredJobs.map((job) => (
-              <div key={job._id} className={styles.jobCard}>
+            {filteredJobs.map((job, index) => (
+              <div 
+                key={job._id} 
+                ref={(el) => (jobCardsRef.current[index] = el)}
+                className={styles.jobCard}
+                onMouseEnter={(e) => handleCardHover(e, true)}
+                onMouseLeave={(e) => handleCardHover(e, false)}
+              >
                 <div className={styles.jobHeader}>
                   <div className={styles.jobCompany}>
                     {job.company?.logo ? (
@@ -247,6 +315,9 @@ const AdminJobs = () => {
                   <button 
                     onClick={() => handleApplicants(job._id)}
                     className={styles.actionBtn}
+                    title="View applicants"
+                    onMouseEnter={(e) => handleButtonHover(e, true)}
+                    onMouseLeave={(e) => handleButtonHover(e, false)}
                   >
                     <Users size={18} />
                     Applicants ({job.applicationCount || 0})
@@ -254,12 +325,18 @@ const AdminJobs = () => {
                   <button 
                     onClick={() => handleEdit(job._id)}
                     className={styles.editBtn}
+                    title="Edit job"
+                    onMouseEnter={(e) => handleButtonHover(e, true)}
+                    onMouseLeave={(e) => handleButtonHover(e, false)}
                   >
                     <Edit size={18} />
                   </button>
                   <button 
                     onClick={() => handleDelete(job._id)}
                     className={styles.deleteBtn}
+                    title="Delete job"
+                    onMouseEnter={(e) => handleButtonHover(e, true)}
+                    onMouseLeave={(e) => handleButtonHover(e, false)}
                   >
                     <Trash2 size={18} />
                   </button>

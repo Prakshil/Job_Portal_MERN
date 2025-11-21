@@ -1,19 +1,70 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { GridBackgroundDemo } from "../ui/background";
 import FeaturesSectionDemo from "../ui/features-section-demo-1";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn, IconCode, IconDeviceDesktopAnalytics, IconServer } from "@tabler/icons-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("role");
+  const heroRef = useRef(null);
+  const featuresRef = useRef(null);
+  const categoriesRef = useRef(null);
+
+  useEffect(() => {
+    // Hero section fade in
+    gsap.fromTo(heroRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+
+    // Features section scroll animation
+    if (featuresRef.current) {
+      gsap.fromTo(featuresRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: featuresRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+
+    // Categories section scroll animation
+    if (categoriesRef.current) {
+      gsap.fromTo(categoriesRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: categoriesRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+  }, []);
 
   return (
     <div className="bg-black min-h-screen w-full text-white">
       {/* Hero Section with Background */}
       <GridBackgroundDemo>
-         <div className="flex flex-col items-center justify-center px-4">
+         <div ref={heroRef} className="flex flex-col items-center justify-center px-4">
             <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
               DevConnect Jobs
             </h1>
@@ -22,7 +73,12 @@ const Home = () => {
               Connect with the best tech companies and find opportunities that match your skills.
             </p>
             {!isLoggedIn && (
-                <button onClick={() => navigate("/login")} className="mt-8 px-8 py-3 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition duration-200">
+                <button 
+                  onClick={() => navigate("/login")} 
+                  className="mt-8 px-8 py-3 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  onMouseEnter={(e) => gsap.to(e.currentTarget, { scale: 1.05, duration: 0.3, ease: "power2.out" })}
+                  onMouseLeave={(e) => gsap.to(e.currentTarget, { scale: 1, duration: 0.3, ease: "power2.out" })}
+                >
                     Get Started
                 </button>
             )}
@@ -30,13 +86,13 @@ const Home = () => {
       </GridBackgroundDemo>
 
       {/* Features Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">Why Choose Us?</h2>
         <FeaturesSectionDemo />
       </div>
 
       {/* Bento Grid for Categories */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24">
+      <div ref={categoriesRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24">
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">Explore Categories</h2>
         <BentoGrid className="max-w-4xl mx-auto">
           {items.map((item, i) => (

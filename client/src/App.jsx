@@ -152,6 +152,14 @@ function App() {
           ), // Create new job posting
         },
         {
+          path: "/admin/jobs/edit/:id",
+          element: (
+            <ProtectedRoute allowedRoles={["recruiter"]}>
+              <PostJob />
+            </ProtectedRoute>
+          ), // Edit existing job posting
+        },
+        {
           path: "/admin/jobs/:id/applicants",
           element: (
             <ProtectedRoute allowedRoles={["recruiter"]}>

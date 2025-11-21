@@ -3,15 +3,20 @@
  * Shows latest and popular jobs with company logos
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import style from "./Card.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Card = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -35,6 +40,39 @@ const Card = () => {
     fetchJobs();
   }, []);
 
+  useEffect(() => {
+    if (jobs.length > 0 && cardRefs.current.length > 0) {
+      cardRefs.current.forEach((card, index) => {
+        if (card) {
+          gsap.fromTo(card,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: index * 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+              }
+            }
+          );
+        }
+      });
+    }
+  }, [jobs]);
+
+  const handleCardHover = (e, isEntering) => {
+    gsap.to(e.currentTarget, {
+      y: isEntering ? -8 : 0,
+      scale: isEntering ? 1.02 : 1,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  };
+
   const handleJobClick = (jobId) => {
     navigate(`/job/${jobId}`);
   };
@@ -57,11 +95,14 @@ const Card = () => {
 
   return (
     <div className={style.cardContainer}>
-      {jobs.map((job) => (
+      {jobs.map((job, index) => (
         <div
           key={job._id}
+          ref={(el) => (cardRefs.current[index] = el)}
           className={style.card}
           onClick={() => handleJobClick(job._id)}
+          onMouseEnter={(e) => handleCardHover(e, true)}
+          onMouseLeave={(e) => handleCardHover(e, false)}
         >
           <div className={style.cardHeader}>
             <img
