@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import style from "./Card.module.css";
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from "../../lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +96,10 @@ const Card = () => {
 
   return (
     <div className={style.cardContainer}>
-      {jobs.map((job, index) => (
+      {jobs.map((job, index) => {
+        const { name, logo } = resolveCompany(job);
+        const logoUrl = buildLogoUrl(logo, API_URL) || COMPANY_PLACEHOLDER;
+        return (
         <div
           key={job._id}
           ref={(el) => (cardRefs.current[index] = el)}
@@ -106,24 +110,16 @@ const Card = () => {
         >
           <div className={style.cardHeader}>
             <img
-              src={
-                job.company?.logo 
-                  ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
-                  : job.companyId?.logo
-                    ? (job.companyId.logo.startsWith('http') ? job.companyId.logo : `${API_URL}${job.companyId.logo}`)
-                    : "/vite.svg"
-              }
-              alt={`${job.company?.name || job.companyId?.name || 'Company'} Logo`}
+              src={logoUrl}
+              alt={`${name || 'Company'} Logo`}
               className={style.companyLogo}
-              onError={(e) => {
-                e.target.src = "/vite.svg";
-              }}
+              onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
             />
             <div className={style.jobType}>{job.jobType}</div>
           </div>
 
           <h2 className={style.jobTitle}>{job.title}</h2>
-          <h3 className={style.companyName}>{job.company?.name || job.companyId?.name || job.companyName || "Company Name"}</h3>
+          <h3 className={style.companyName}>{name || "Company Name"}</h3>
 
           <div className={style.jobDetails}>
             <p>
@@ -151,7 +147,7 @@ const Card = () => {
             <button className={style.applyBtn}>Apply Now</button>
           </div>
         </div>
-      ))}
+      );})}
     </div>
   );
 };

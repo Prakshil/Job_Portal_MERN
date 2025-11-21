@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from "../../lib/utils";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./Details.module.css";
 
@@ -6,6 +7,7 @@ const JobDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
+  const [companyResolved, setCompanyResolved] = useState({ name: null, logo: null });
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -18,6 +20,8 @@ const JobDetails = () => {
         
         if (response.ok && data.job) {
           setJob(data.job);
+          const c = resolveCompany(data.job);
+          setCompanyResolved({ name: c.name, logo: buildLogoUrl(c.logo, API_URL) || COMPANY_PLACEHOLDER });
         } else {
           console.error("Failed to fetch job details:", data.error);
         }
@@ -82,22 +86,22 @@ const JobDetails = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.companyInfo}>
-          <img
-            src={
-              job.company?.logo 
-                ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
-                : "/vite.svg"
-            }
-            alt={`${job.company?.name || job.companyId?.name || 'Company'} Logo`}
-            className={styles.companyLogo}
-            onError={(e) => {
-              e.target.src = "/vite.svg"; // Fallback if logo fails to load
-            }}
-          />
+          {companyResolved.logo ? (
+            <img
+              src={companyResolved.logo}
+              alt={`${companyResolved.name || 'Company'} Logo`}
+              className={styles.companyLogo}
+              onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
+            />
+          ) : (
+            <img
+              src={COMPANY_PLACEHOLDER}
+              alt="Company placeholder"
+              className={styles.companyLogo}
+            />
+          )}
           <div>
-            <h1 className={styles.companyName}>
-              {job.company?.name || job.companyId?.name || job.companyName || "Company Name"}
-            </h1>
+            <h1 className={styles.companyName}>{companyResolved.name || "Company Name"}</h1>
             <p className={styles.location}>📍 {job.location}</p>
             <p className={styles.postedDate}>
               Posted on {new Date(job.createdAt).toLocaleDateString()}

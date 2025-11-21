@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Briefcase, Users, Eye, Plus, Calendar, MapPin, DollarSign, Trash2, Edit, Building2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from '../lib/utils';
 import gsap from 'gsap';
 import styles from "./AdminJobs.module.css";
 
@@ -9,6 +10,7 @@ const AdminJobs = () => {
   const [input, setInput] = useState("");
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [companiesMap, setCompaniesMap] = useState({});
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
   const headerRef = useRef(null);
@@ -16,26 +18,42 @@ const AdminJobs = () => {
   const jobCardsRef = useRef([]);
 
   // Fetch jobs created by the current recruiter
+  // Fetch jobs and companies to resolve company names/logos
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchJobsAndCompanies = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`${API_URL}/api/job/recruiter`, {
+        const jobsRes = await fetch(`${API_URL}/api/job/recruiter`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
           },
           credentials: 'include',
         });
+        const jobsData = await jobsRes.json();
+        console.log("Jobs fetch response:", jobsData);
 
-        const data = await response.json();
-        console.log("Jobs fetch response:", data);
-
-        if (response.ok && data.jobs) {
-          setJobs(data.jobs);
+        if (jobsRes.ok && jobsData.jobs) {
+          setJobs(jobsData.jobs);
         } else {
-          console.error("Failed to fetch jobs:", data.error);
+          console.error("Failed to fetch jobs:", jobsData.error);
           setJobs([]);
+        }
+
+        // Fetch companies list for mapping
+        const companiesRes = await fetch(`${API_URL}/api/company/get`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          credentials: 'include',
+        });
+        const companiesData = await companiesRes.json();
+        console.log("Companies fetch response (for mapping):", companiesData);
+        if (companiesRes.ok && Array.isArray(companiesData.company)) {
+          const map = {};
+          companiesData.company.forEach(c => { map[c._id] = c; });
+          setCompaniesMap(map);
         }
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -45,7 +63,7 @@ const AdminJobs = () => {
       }
     };
 
-    fetchJobs();
+    fetchJobsAndCompanies();
   }, []);
 
   useEffect(() => {
@@ -259,7 +277,10 @@ const AdminJobs = () => {
           </div>
         ) : (
           <div className={styles.jobsGrid}>
-            {filteredJobs.map((job, index) => (
+            {filteredJobs.map((job, index) => {
+              const { name, logo } = resolveCompany(job, companiesMap);
+              const logoUrl = buildLogoUrl(logo, API_URL) || COMPANY_PLACEHOLDER;
+              return (
               <div 
                 key={job._id} 
                 ref={(el) => (jobCardsRef.current[index] = el)}
@@ -269,28 +290,23 @@ const AdminJobs = () => {
               >
                 <div className={styles.jobHeader}>
                   <div className={styles.jobCompany}>
-                    {(job.company?.logo || job.companyId?.logo) ? (
-                      <img 
-                        src={
-                          job.company?.logo 
-                            ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
-                            : (job.companyId.logo.startsWith('http') ? job.companyId.logo : `${API_URL}${job.companyId.logo}`)
-                        } 
-                        alt={job.company?.name || job.companyId?.name || 'Company'}
+                    {logoUrl ? (
+                      <img
+                        src={logoUrl}
+                        alt={name || 'Company'}
                         className={styles.companyLogo}
                         onError={(e) => {
-                          e.target.onerror = null;
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
                         }}
                       />
                     ) : null}
-                    <div className={styles.logoPlaceholder} style={{ display: (job.company?.logo || job.companyId?.logo) ? 'none' : 'flex' }}>
+                    <div className={styles.logoPlaceholder} style={{ display: logoUrl ? 'none' : 'flex' }}>
                       <Building2 size={20} />
                     </div>
                     <div>
                       <h3 className={styles.jobTitle}>{job.title}</h3>
-                      <p className={styles.companyName}>{job.company?.name || job.companyId?.name || job.companyName || 'N/A'}</p>
+                      <p className={styles.companyName}>{name || 'N/A'}</p>
                     </div>
                   </div>
                   <span className={styles.jobBadge}>{job.jobType}</span>
@@ -346,7 +362,7 @@ const AdminJobs = () => {
                   </button>
                 </div>
               </div>
-            ))}
+            );})}
           </div>
         )}
       </div>

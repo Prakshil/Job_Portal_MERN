@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from "../../lib/utils";
 import { useNavigate } from "react-router-dom";
 import styles from "./UserDashboard.module.css";
 
@@ -84,7 +85,10 @@ const UserDashboard = () => {
         </div>
       ) : (
         <div className={styles.applicationsGrid}>
-          {applications.map((application) => (
+          {applications.map((application) => {
+            const { name, logo } = resolveCompany(application.job);
+            const logoUrl = buildLogoUrl(logo, API_URL) || COMPANY_PLACEHOLDER;
+            return (
             <div key={application._id} className={styles.applicationCard}>
               <div className={styles.cardHeader}>
                 <h3 className={styles.jobTitle}>{application.job?.title}</h3>
@@ -93,22 +97,14 @@ const UserDashboard = () => {
 
               <div className={styles.companyInfo}>
                 <img
-                  src={
-                    application.job?.company?.logo 
-                      ? (application.job.company.logo.startsWith('http') ? application.job.company.logo : `${API_URL}${application.job.company.logo}`)
-                      : application.job?.companyId?.logo
-                        ? (application.job.companyId.logo.startsWith('http') ? application.job.companyId.logo : `${API_URL}${application.job.companyId.logo}`)
-                        : "/vite.svg"
-                  }
-                  alt={`${application.job?.company?.name || application.job?.companyId?.name || 'Company'} Logo`}
+                  src={logoUrl}
+                  alt={`${name || 'Company'} Logo`}
                   className={styles.companyLogo}
-                  onError={(e) => {
-                    e.target.src = "/vite.svg"; // Fallback if logo fails to load
-                  }}
+                  onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
                 />
                 <div>
                   <h4 className={styles.companyName}>
-                    {application.job?.company?.name || application.job?.companyId?.name || application.job?.companyName || "Company Name"}
+                    {name || "Company Name"}
                   </h4>
                   <p className={styles.location}>📍 {application.job?.location}</p>
                 </div>
@@ -147,7 +143,7 @@ const UserDashboard = () => {
                 )}
               </div>
             </div>
-          ))}
+          );})}
         </div>
       )}
 
