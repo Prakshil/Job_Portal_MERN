@@ -83,15 +83,21 @@ const JobDetails = () => {
       <div className={styles.header}>
         <div className={styles.companyInfo}>
           <img
-            src={job.company?.logo ? `${API_URL}${job.company.logo}` : "/vite.svg"}
-            alt={`${job.company?.name} Logo`}
+            src={
+              job.company?.logo 
+                ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
+                : "/vite.svg"
+            }
+            alt={`${job.company?.name || job.companyId?.name || 'Company'} Logo`}
             className={styles.companyLogo}
             onError={(e) => {
               e.target.src = "/vite.svg"; // Fallback if logo fails to load
             }}
           />
           <div>
-            <h1 className={styles.companyName}>{job.company?.name || "Company Name"}</h1>
+            <h1 className={styles.companyName}>
+              {job.company?.name || job.companyId?.name || job.companyName || "Company Name"}
+            </h1>
             <p className={styles.location}>📍 {job.location}</p>
             <p className={styles.postedDate}>
               Posted on {new Date(job.createdAt).toLocaleDateString()}
@@ -144,11 +150,11 @@ const JobDetails = () => {
 
         <div className={styles.companyDetails}>
           <h3>🏢 About the Company</h3>
-          <p>{job.company?.description || "Company description not available."}</p>
+          <p>{job.company?.description || job.companyId?.description || "Company description not available."}</p>
           <div className={styles.companyMeta}>
-            <p><strong>Industry:</strong> {job.company?.industry || "Not specified"}</p>
-            <p><strong>Website:</strong> {job.company?.website || "Not provided"}</p>
-            <p><strong>Location:</strong> {job.company?.location || job.location}</p>
+            <p><strong>Industry:</strong> {job.company?.industry || job.companyId?.industry || "Not specified"}</p>
+            <p><strong>Website:</strong> {job.company?.website || job.companyId?.website || "Not provided"}</p>
+            <p><strong>Location:</strong> {job.company?.location || job.companyId?.location || job.location}</p>
           </div>
         </div>
 

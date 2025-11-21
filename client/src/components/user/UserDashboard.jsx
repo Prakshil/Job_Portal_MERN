@@ -93,8 +93,14 @@ const UserDashboard = () => {
 
               <div className={styles.companyInfo}>
                 <img
-                  src={application.job?.company?.logo ? `${API_URL}${application.job.company.logo}` : "/vite.svg"}
-                  alt={`${application.job?.company?.name} Logo`}
+                  src={
+                    application.job?.company?.logo 
+                      ? (application.job.company.logo.startsWith('http') ? application.job.company.logo : `${API_URL}${application.job.company.logo}`)
+                      : application.job?.companyId?.logo
+                        ? (application.job.companyId.logo.startsWith('http') ? application.job.companyId.logo : `${API_URL}${application.job.companyId.logo}`)
+                        : "/vite.svg"
+                  }
+                  alt={`${application.job?.company?.name || application.job?.companyId?.name || 'Company'} Logo`}
                   className={styles.companyLogo}
                   onError={(e) => {
                     e.target.src = "/vite.svg"; // Fallback if logo fails to load
@@ -102,7 +108,7 @@ const UserDashboard = () => {
                 />
                 <div>
                   <h4 className={styles.companyName}>
-                    {application.job?.company?.name || "Company Name"}
+                    {application.job?.company?.name || application.job?.companyId?.name || application.job?.companyName || "Company Name"}
                   </h4>
                   <p className={styles.location}>📍 {application.job?.location}</p>
                 </div>

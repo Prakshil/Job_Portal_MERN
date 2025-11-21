@@ -269,10 +269,14 @@ const AdminJobs = () => {
               >
                 <div className={styles.jobHeader}>
                   <div className={styles.jobCompany}>
-                    {job.company?.logo ? (
+                    {(job.company?.logo || job.companyId?.logo) ? (
                       <img 
-                        src={job.company.logo} 
-                        alt={job.company.name}
+                        src={
+                          job.company?.logo 
+                            ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
+                            : (job.companyId.logo.startsWith('http') ? job.companyId.logo : `${API_URL}${job.companyId.logo}`)
+                        } 
+                        alt={job.company?.name || job.companyId?.name || 'Company'}
                         className={styles.companyLogo}
                         onError={(e) => {
                           e.target.onerror = null;
@@ -281,12 +285,12 @@ const AdminJobs = () => {
                         }}
                       />
                     ) : null}
-                    <div className={styles.logoPlaceholder} style={{ display: job.company?.logo ? 'none' : 'flex' }}>
+                    <div className={styles.logoPlaceholder} style={{ display: (job.company?.logo || job.companyId?.logo) ? 'none' : 'flex' }}>
                       <Building2 size={20} />
                     </div>
                     <div>
                       <h3 className={styles.jobTitle}>{job.title}</h3>
-                      <p className={styles.companyName}>{job.company?.name || 'N/A'}</p>
+                      <p className={styles.companyName}>{job.company?.name || job.companyId?.name || job.companyName || 'N/A'}</p>
                     </div>
                   </div>
                   <span className={styles.jobBadge}>{job.jobType}</span>

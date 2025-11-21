@@ -106,8 +106,14 @@ const Card = () => {
         >
           <div className={style.cardHeader}>
             <img
-              src={job.company?.logo ? `${API_URL}${job.company.logo}` : "/vite.svg"}
-              alt={`${job.company?.name} Logo`}
+              src={
+                job.company?.logo 
+                  ? (job.company.logo.startsWith('http') ? job.company.logo : `${API_URL}${job.company.logo}`)
+                  : job.companyId?.logo
+                    ? (job.companyId.logo.startsWith('http') ? job.companyId.logo : `${API_URL}${job.companyId.logo}`)
+                    : "/vite.svg"
+              }
+              alt={`${job.company?.name || job.companyId?.name || 'Company'} Logo`}
               className={style.companyLogo}
               onError={(e) => {
                 e.target.src = "/vite.svg";
@@ -117,7 +123,7 @@ const Card = () => {
           </div>
 
           <h2 className={style.jobTitle}>{job.title}</h2>
-          <h3 className={style.companyName}>{job.company?.name || "Company Name"}</h3>
+          <h3 className={style.companyName}>{job.company?.name || job.companyId?.name || job.companyName || "Company Name"}</h3>
 
           <div className={style.jobDetails}>
             <p>
