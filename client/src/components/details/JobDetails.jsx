@@ -101,7 +101,6 @@ const JobDetails = () => {
             />
           )}
           <div>
-            <h1 className={styles.companyName}>{companyResolved.name || "Company Name"}</h1>
             <p className={styles.location}>📍 {job.location}</p>
             <p className={styles.postedDate}>
               Posted on {new Date(job.createdAt).toLocaleDateString()}
