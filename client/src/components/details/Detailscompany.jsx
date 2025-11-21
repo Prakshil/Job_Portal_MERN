@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from "../../lib/utils";
 import styles from "./Details.module.css";
 
 const Detailscompany = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
+  const [companyLogo, setCompanyLogo] = useState(COMPANY_PLACEHOLDER);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -18,6 +20,10 @@ const Detailscompany = () => {
         
         if (response.ok && data.job) {
           setJob(data.job);
+          // Resolve company logo using utility function
+          const { logo } = resolveCompany(data.job);
+          const logoUrl = buildLogoUrl(logo, API_URL) || COMPANY_PLACEHOLDER;
+          setCompanyLogo(logoUrl);
         } else {
           console.error("Failed to fetch job details:", data.error);
         }
@@ -31,7 +37,7 @@ const Detailscompany = () => {
     if (id) {
       fetchJobDetails();
     }
-  }, [id]);
+  }, [id, API_URL]);
 
   const handleApply = async () => {
     const token = localStorage.getItem("token");
@@ -83,11 +89,11 @@ const Detailscompany = () => {
       <div className={styles.header}>
         <div className={styles.companyInfo}>
           <img
-            src={job.company?.logo ? `${API_URL}${job.company.logo}` : "/vite.svg"}
-            alt={`${job.company?.name} Logo`}
+            src={companyLogo}
+            alt="Company Logo"
             className={styles.companyLogo}
             onError={(e) => {
-              e.target.src = "/vite.svg"; // Fallback if logo fails to load
+              e.target.src = COMPANY_PLACEHOLDER;
             }}
           />
           <div>
