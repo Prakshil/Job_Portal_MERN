@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from "../../lib/utils";
 import style from "./Jobs.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -299,7 +300,10 @@ const Jobs = () => {
           ) : filteredJobs.length === 0 ? (
             <div className={style.noJobs}>No jobs found matching your criteria</div>
           ) : (
-            filteredJobs.map((job) => (
+            filteredJobs.map((job) => {
+              const { name, logo } = resolveCompany(job);
+              const logoUrl = buildLogoUrl(logo, API_URL) || COMPANY_PLACEHOLDER;
+              return (
               <div key={job._id} className={style.card}>
                 <div className={style.cardHeader}>
                   <span className={style.date}>
@@ -308,22 +312,20 @@ const Jobs = () => {
                 </div>
 
                 <div className={style.companyInfo}>
-                  <img
-                    src={job.company?.logoUrl || (job.company?.logo ? `${API_URL}${job.company.logo}` : "https://cdn-icons-png.flaticon.com/512/3688/3688609.png")}
-                    alt={`${job.company?.name} Logo`}
-                    className={style.logo}
-                    onError={(e) => {
-                      e.target.src = "https://cdn-icons-png.flaticon.com/512/3688/3688609.png"; // Fallback if logo fails to load
-                    }}
-                  />
+                  {logoUrl && (
+                    <img
+                      src={logoUrl}
+                      alt={`${name || 'Company'} Logo`}
+                      className={style.logo}
+                      onError={(e) => { e.target.src = COMPANY_PLACEHOLDER; }}
+                    />
+                  )}
                   <div>
-                    <h2 className={style.companyName}>
-                      {job.company?.name || "Company Name"}
-                    </h2>
+                    {name && (
+                      <h2 className={style.companyName}>{name}</h2>
+                    )}
                     <p className={style.location}>📍 {job.location}</p>
-                    <p className={style.roleType}>
-                      💼 {job.title} ({job.jobType})
-                    </p>
+                    <p className={style.roleType}>💼 {job.title} ({job.jobType})</p>
                   </div>
                 </div>
 
@@ -355,7 +357,7 @@ const Jobs = () => {
                   </button>
                 </div>
               </div>
-            ))
+            );})
           )}
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Briefcase, Users, Eye, Plus, Calendar, MapPin, DollarSign, Trash2, Edit, Building2 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from '../lib/utils';
+import { resolveCompany, buildLogoUrl, COMPANY_PLACEHOLDER } from '../lib/utils.js';
 import gsap from 'gsap';
 import styles from "./AdminJobs.module.css";
 
@@ -306,7 +306,7 @@ const AdminJobs = () => {
                     </div>
                     <div>
                       <h3 className={styles.jobTitle}>{job.title}</h3>
-                      <p className={styles.companyName}>{name || 'N/A'}</p>
+                      {name && <p className={styles.companyName}>{name}</p>}
                     </div>
                   </div>
                   <span className={styles.jobBadge}>{job.jobType}</span>

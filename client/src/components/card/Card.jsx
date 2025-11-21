@@ -119,7 +119,7 @@ const Card = () => {
           </div>
 
           <h2 className={style.jobTitle}>{job.title}</h2>
-          <h3 className={style.companyName}>{name || "Company Name"}</h3>
+          {name && <h3 className={style.companyName}>{name}</h3>}
 
           <div className={style.jobDetails}>
             <p>
