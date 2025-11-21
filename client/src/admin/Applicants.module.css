@@ -23,7 +23,7 @@
 
 .jobInfo h2 {
   margin: 0 0 5px 0;
-  color: #333;
+  color: hsl(var(--foreground));
   font-size: 1.2rem;
 }
 
@@ -58,9 +58,9 @@
 .emptyState {
   text-align: center;
   padding: 60px 20px;
-  background: white;
+  background: hsl(var(--card));
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .emptyState h3 {
@@ -75,7 +75,7 @@
 
 .tableWrapper {
   overflow-x: auto;
-  background: white;
+  background: hsl(var(--card));
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
@@ -157,7 +157,7 @@
 }
 
 .applicantInfo strong {
-  color: #333;
+  color: hsl(var(--foreground));
 }
 
 .statusBadge {

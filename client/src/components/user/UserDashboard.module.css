@@ -10,11 +10,11 @@
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid hsl(var(--border));
 }
 
 .header h1 {
-  color: #333;
+  color: hsl(var(--foreground));
   margin: 0;
 }
 
@@ -80,11 +80,11 @@
 }
 
 .applicationCard {
-  background: white;
-  border: 1px solid #e9ecef;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .jobTitle {
-  color: #333;
+  color: hsl(var(--foreground));
   margin: 0;
   font-size: 18px;
   font-weight: 600;
@@ -133,7 +133,7 @@
 .companyName {
   margin: 0;
   font-size: 16px;
-  color: #333;
+  color: hsl(var(--foreground));
 }
 
 .location {
@@ -148,7 +148,7 @@
   gap: 15px;
   margin-bottom: 15px;
   padding: 10px;
-  background: #f8f9fa;
+  background: hsl(var(--background));
   border-radius: 6px;
 }
 
@@ -222,12 +222,12 @@
 }
 
 .statCard {
-  background: white;
-  border: 1px solid #e9ecef;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   border-radius: 12px;
   padding: 25px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .statCard h3 {

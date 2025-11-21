@@ -5,7 +5,7 @@
  */
 
 import "./App.css";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider, useLocation } from "react-router-dom";
 
 // Public Components
 import Home from "./components/home/Home";
@@ -32,11 +32,25 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/dashborad/Dashboard";
 
 const Layout = () => {
+  const location = useLocation();
+  const role = typeof window !== "undefined" ? localStorage.getItem("role") : null;
+
+  // Hide footer for logged-in areas (admin/user/dashboard)
+  const hideFooter =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/user") ||
+    location.pathname === "/dashboard";
+
+  // Add top padding when user is logged in to prevent header overlap
+  const contentPaddingClass = role ? "pt-24" : "";
+
   return (
     <>
       <Header />
-      <Outlet />
-      <Footer />
+      <div className={contentPaddingClass}>
+        <Outlet />
+      </div>
+      {!hideFooter && <Footer />}
     </>
   );
 };

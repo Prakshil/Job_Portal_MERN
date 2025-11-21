@@ -29,6 +29,18 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    
+    /* Custom aliases for legacy components */
+    --background-dark: #f8f9fa;
+    --background-card: #ffffff;
+    --background-light: #f1f3f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --border-color: #e5e7eb;
+    --primary: #6c63ff;
+    --primary-dark: #5b52d9;
+    --primary-light: #8881ff;
   }
   .dark {
     --background: 0 0% 0%;
@@ -55,6 +67,18 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
+    /* Custom aliases for legacy components - DARK MODE */
+    --background-dark: #0a0a0a;
+    --background-card: #1a1a1a;
+    --background-light: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --border-color: #27272a;
+    --primary: #6c63ff;
+    --primary-dark: #5b52d9;
+    --primary-light: #8881ff;
   }
 }
 

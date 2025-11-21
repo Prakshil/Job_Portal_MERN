@@ -30,7 +30,7 @@ input, input:focus, input:active, input:autofill, input:-webkit-autofill, input:
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #666;
+  color: hsl(var(--muted-foreground));
   font-weight: 500;
   border: none;
   background: transparent;
@@ -39,7 +39,7 @@ input, input:focus, input:active, input:autofill, input:-webkit-autofill, input:
 }
 
 .backBtn:hover {
-  color: #222;
+  color: hsl(var(--foreground));
 }
 
 .title {
@@ -66,11 +66,13 @@ input, input:focus, input:active, input:autofill, input:-webkit-autofill, input:
 
 .field input {
   padding: 0.7rem 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid hsl(var(--border));
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 .field input:focus {

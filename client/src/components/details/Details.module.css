@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background: #f8f9fa;
+  background: hsl(var(--background));
   min-height: 100vh;
 }
 
@@ -11,10 +11,10 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 30px;
-  background: white;
+  background: hsl(var(--card));
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .companyInfo {
@@ -33,7 +33,7 @@
 .companyName {
   margin: 0;
   font-size: 1.8rem;
-  color: #333;
+  color: hsl(var(--foreground));
 }
 
 .location {
@@ -64,22 +64,22 @@
 }
 
 .jobContent {
-  background: white;
+  background: hsl(var(--card));
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .jobHeader {
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid hsl(var(--border));
 }
 
 .jobTitle {
   margin: 0 0 15px 0;
   font-size: 2rem;
-  color: #333;
+  color: hsl(var(--foreground));
 }
 
 .jobMeta {
@@ -89,12 +89,12 @@
 }
 
 .jobType, .experience, .positions {
-  background: #e9ecef;
+  background: hsl(var(--muted));
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #495057;
+  color: hsl(var(--muted-foreground));
 }
 
 .salarySection, .descriptionSection, .requirementsSection, .companyDetails {
@@ -102,7 +102,7 @@
 }
 
 .salarySection h3, .descriptionSection h3, .requirementsSection h3, .companyDetails h3 {
-  color: #333;
+  color: hsl(var(--foreground));
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
@@ -145,7 +145,7 @@
   gap: 15px;
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 2px solid #e9ecef;
+  border-top: 2px solid hsl(var(--border));
 }
 
 .applyBtn {
