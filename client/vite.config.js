@@ -10,4 +10,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  publicDir: 'public',
+  build: {
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'favicon.svg') {
+            return 'favicon.svg';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
+  },
 })
