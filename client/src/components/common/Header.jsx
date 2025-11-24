@@ -22,7 +22,7 @@ const Header = ({ className }) => {
     <div className={cn("fixed top-5 inset-x-0 max-w-2xl mx-auto z-50", className)}>
       <Menu setActive={setActive}>
         <div className="flex items-center gap-4 mr-4">
-            <HoveredLink to="/" className="font-bold text-lg">DevConnect</HoveredLink>
+            <HoveredLink to="/" className="font-bold text-2xl">DevConnect</HoveredLink>
         </div>
         
         {role === "recruiter" ? (

@@ -65,10 +65,10 @@ const Home = () => {
       {/* Hero Section with Background */}
       <GridBackgroundDemo>
          <div ref={heroRef} className="flex flex-col items-center justify-center px-4">
-            <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 animate-fade-in-up">
               DevConnect Jobs
             </h1>
-            <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
+            <p className="mt-6 font-normal text-xl md:text-2xl text-neutral-300 max-w-3xl text-center mx-auto animate-fade-in-up-delay">
               The Premier Tech Job Platform. Discover & Apply to Your Ideal Tech Careers.
               Connect with the best tech companies and find opportunities that match your skills.
             </p>
@@ -114,27 +114,27 @@ const items = [
   {
     title: "Frontend Developer",
     description: "Build beautiful user interfaces with React, Vue, or Angular. \n\n• 150+ Open Positions\n• Avg Salary: $95k\n• Remote Options Available",
-    icon: <IconCode className="h-4 w-4 text-neutral-500" />,
+    icon: <IconCode className="h-6 w-6 text-neutral-400" />,
   },
   {
     title: "Backend Developer",
     description: "Power the web with robust APIs using Node.js, Python, or Go. \n\n• 120+ Open Positions\n• Avg Salary: $105k\n• High Demand",
-    icon: <IconServer className="h-4 w-4 text-neutral-500" />,
+    icon: <IconServer className="h-6 w-6 text-neutral-400" />,
   },
   {
     title: "Full Stack",
     description: "Master both ends of the spectrum. \n\n• 200+ Open Positions\n• Avg Salary: $110k\n• Versatile Roles",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    icon: <IconSignature className="h-6 w-6 text-neutral-400" />,
   },
   {
     title: "Data Science",
     description: "Unlock insights from data with ML and AI. \n\n• 80+ Open Positions\n• Avg Salary: $120k\n• Rapidly Growing Field",
-    icon: <IconDeviceDesktopAnalytics className="h-4 w-4 text-neutral-500" />,
+    icon: <IconDeviceDesktopAnalytics className="h-6 w-6 text-neutral-400" />,
   },
   {
     title: "DevOps Engineer",
     description: "Streamline deployment and operations. \n\n• 90+ Open Positions\n• Avg Salary: $115k\n• Critical Infrastructure Role",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: <IconTableColumn className="h-6 w-6 text-neutral-400" />,
   },
 ];
 
