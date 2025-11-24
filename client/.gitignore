@@ -64,7 +64,7 @@ jspm_packages/
 
 # Gatsby files
 .cache/
-public
+# public - commented out for Vite, we need public/favicon.svg
 
 # Storybook build outputs
 .out
